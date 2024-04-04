@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import type {Contact} from '../types/index.types';
+import type {NewContact} from '../types/index.types';
 
 const BASE_URL = 'https://contact.herokuapp.com/contact';
 
@@ -24,7 +24,7 @@ const getContact = async (id: string) => {
   }
 };
 
-const postContact = async (contact: Contact) => {
+const postContact = async (contact: NewContact) => {
   try {
     const {data} = await axios.post(BASE_URL, contact);
 
@@ -34,7 +34,7 @@ const postContact = async (contact: Contact) => {
   }
 };
 
-const putContact = async (contact: Contact, id: string) => {
+const putContact = async (contact: NewContact, id: string) => {
   try {
     const {data} = await axios.put(BASE_URL + '/' + id, contact);
 

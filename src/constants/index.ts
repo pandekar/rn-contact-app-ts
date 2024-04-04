@@ -17,6 +17,7 @@ const screenConstants = {
 const colorConstants = {
   primary: '#191D88',
   secondary: '#1450A3',
+  thirdary: '#FFC436',
 };
 
 export {reduxConstants, screenConstants, colorConstants};

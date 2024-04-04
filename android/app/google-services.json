@@ -1,0 +1,105 @@
+{
+  "project_info": {
+    "project_number": "83341420525",
+    "project_id": "contactapp-57d05",
+    "storage_bucket": "contactapp-57d05.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83341420525:android:93b2517d59c4876bd229e4",
+        "android_client_info": {
+          "package_name": "com.contactapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83341420525-r0ksc2i6th7659pm1am3aimk75qvbhe0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdUm7kcXMLEPI87vcXsxnWtmvoQLlLoYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83341420525-r0ksc2i6th7659pm1am3aimk75qvbhe0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83341420525:android:954549d6b50a4ab7d229e4",
+        "android_client_info": {
+          "package_name": "com.contactappandekar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83341420525-qf7hjqtv8qc1ovfect5jc5crt8upmijf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.contactappandekar",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "83341420525-r0ksc2i6th7659pm1am3aimk75qvbhe0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdUm7kcXMLEPI87vcXsxnWtmvoQLlLoYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83341420525-r0ksc2i6th7659pm1am3aimk75qvbhe0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:83341420525:android:6d8a0faf10db0380d229e4",
+        "android_client_info": {
+          "package_name": "com.rncontactapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "83341420525-r0ksc2i6th7659pm1am3aimk75qvbhe0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdUm7kcXMLEPI87vcXsxnWtmvoQLlLoYg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "83341420525-r0ksc2i6th7659pm1am3aimk75qvbhe0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
