@@ -51,8 +51,8 @@ const Home = (): React.JSX.Element => {
     navigation.navigate(CONTACT_ADD);
   };
 
-  const readContact = (id: string) => {
-    navigation.navigate(CONTACT_DETAIL, id);
+  const readContact = (item: Contact) => {
+    navigation.navigate(CONTACT_DETAIL, item);
   };
 
   const updateContact = (id: string) => {
@@ -105,7 +105,7 @@ const Home = (): React.JSX.Element => {
             data={contacts}
             renderItem={({item}) => (
               <View style={styles.contact}>
-                <TouchableOpacity onPress={() => readContact(item.id)}>
+                <TouchableOpacity onPress={() => readContact(item)}>
                   <View>
                     {item.photo != 'N/A' ? (
                       <Image

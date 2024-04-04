@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 25,
     flexDirection: 'row',
-    backgroundColor: '#1450A3',
+    backgroundColor: colorConstants.secondary,
   },
   header: {
     paddingLeft: 40,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     height: 50,
     borderBottomStartRadius: 25,
     borderBottomEndRadius: 25,
-    backgroundColor: colorConstants.header,
+    backgroundColor: colorConstants.primary,
     color: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -16,7 +16,7 @@ const Router = (): React.JSX.Element => {
     <RouterStack.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: colorConstants.header,
+          backgroundColor: colorConstants.primary,
         },
         headerTintColor: '#fff',
       }}>
