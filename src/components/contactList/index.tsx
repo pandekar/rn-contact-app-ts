@@ -44,7 +44,7 @@ const ContactList = ({
             <Text style={styles.name}>
               {item.firstName} {item.lastName}
             </Text>
-            <Text style={{fontSize: 15, color: 'white'}}>age: {item.age}</Text>
+            <Text style={styles.ageStyle}>age: {item.age}</Text>
           </View>
           <View style={styles.buttonContainer}>
             <View>

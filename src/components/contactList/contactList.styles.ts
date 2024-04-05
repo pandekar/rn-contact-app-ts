@@ -22,6 +22,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
   },
+  ageStyle: {
+    fontSize: 15,
+    color: 'white',
+  },
   image: {
     width: 100,
     height: 100,

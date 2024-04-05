@@ -10,7 +10,7 @@ import type {Props} from './homeHeader.types';
 /**
  * Home header
  * @param {Props} props - Home header props
- * @returns {React.JSX.Element}
+ * @returns {React.JSX.Element} - component
  */
 const HomeHeader = ({
   refreshContacts,
