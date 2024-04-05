@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   },
   mainBox: {
     flex: 1,
-    backgroundColor: colorConstants.secondary,
     width: '100%',
     borderTopLeftRadius: 36,
     borderTopRightRadius: 36,
@@ -71,10 +70,11 @@ const styles = StyleSheet.create({
   },
   buttonStyle: {
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
+    backgroundColor: colorConstants.thirdary,
     padding: 5,
     marginVertical: 10,
     width: 250,
+    borderRadius: 12,
   },
   image: {
     width: 100,

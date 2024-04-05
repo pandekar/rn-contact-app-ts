@@ -57,17 +57,6 @@ const ContactAdd = () => {
     }
   }, [route.params]);
 
-  const validation = () => {
-    let messageError = contactValidation(firstname, lastname, age, imageurl);
-    if (!messageError && status === 'update') {
-      handlePutContact();
-    } else if (!messageError) {
-      handlePostContact();
-    } else {
-      ToastAndroid.show(messageError, ToastAndroid.LONG);
-    }
-  };
-
   const handlePostContact = () => {
     const newContact = {
       firstName: firstname,
@@ -102,6 +91,17 @@ const ContactAdd = () => {
         ToastAndroid.show(response.message, ToastAndroid.LONG);
       }
     });
+  };
+
+  const validation = () => {
+    let messageError = contactValidation(firstname, lastname, age, imageurl);
+    if (!messageError && status === 'update') {
+      handlePutContact();
+    } else if (!messageError) {
+      handlePostContact();
+    } else {
+      ToastAndroid.show(messageError, ToastAndroid.LONG);
+    }
   };
 
   const handleFirstname = (text: string) => {

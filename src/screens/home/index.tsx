@@ -2,7 +2,6 @@ import * as React from 'react';
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   FlatList,
   Image,
@@ -10,21 +9,19 @@ import {
   ToastAndroid,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome6';
-import {
-  useRoute,
-  useNavigation,
-  useFocusEffect,
-} from '@react-navigation/native';
+import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import styles from './home.styles';
 import {screenConstants} from '../../constants';
-import {getContacts, deleteContact} from '../../services/contact.service';
+import {deleteContact} from '../../services/contact.service';
 import {
   fetchInitiateContact,
   reloadContacts,
 } from '../../redux/action/contact.action';
-import {Contact, InitialState} from '../../types/index.types';
+import {LoadingMask} from '../../components';
+
+import type {Contact, InitialState} from '../../types/index.types';
 
 const {CONTACT_ADD, CONTACT_DETAIL} = screenConstants;
 
@@ -63,9 +60,20 @@ const Home = (): React.JSX.Element => {
     navigation.navigate(CONTACT_ADD, contact);
   };
 
-  const deleteContact = () => {
-    console.log('delete');
-  };
+  const deleteAlert = (id: string) =>
+    Alert.alert('delete contact?', '', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'OK',
+        onPress: () => {
+          deleteContact(id);
+          dispatch(reloadContacts());
+        },
+      },
+    ]);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -79,26 +87,30 @@ const Home = (): React.JSX.Element => {
   return (
     <View style={styles.main}>
       <View style={styles.header}>
+        <View>
+          <TouchableOpacity>
+            <Icon
+              name="rotate"
+              size={30}
+              color="white"
+              onPress={() => refreshContacts()}
+            />
+          </TouchableOpacity>
+        </View>
         <Text style={styles.headerText}>Contact List</Text>
-        <TouchableOpacity>
-          <Icon
-            name="rotate"
-            size={30}
-            color="white"
-            onPress={() => refreshContacts()}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Icon
-            name="plus"
-            size={30}
-            color="white"
-            onPress={() => createContact()}
-          />
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity>
+            <Icon
+              name="plus"
+              size={30}
+              color="white"
+              onPress={() => createContact()}
+            />
+          </TouchableOpacity>
+        </View>
       </View>
+      {contactsLoading && <LoadingMask />}
       <View style={styles.listBox}>
-        {contactsLoading && <Text style={{fontSize: 20}}>Loading...</Text>}
         {error && <Text>{error}</Text>}
         {contacts && (
           <FlatList
@@ -107,7 +119,7 @@ const Home = (): React.JSX.Element => {
               <View style={styles.contact}>
                 <TouchableOpacity onPress={() => readContact(item)}>
                   <View>
-                    {item.photo != 'N/A' ? (
+                    {item.photo !== 'N/A' ? (
                       <Image
                         style={styles.image}
                         source={{
