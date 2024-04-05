@@ -1,11 +1,16 @@
 import * as React from 'react';
 import {View, Text, Image} from 'react-native';
+
 import {useRoute} from '@react-navigation/native';
 
 import styles from './contactDetail.styles';
 
 import type {Contact} from '../../types/index.types';
 
+/**
+ * Contact detail screen
+ * @returns {React.JSX.Element}
+ */
 const ContactDetail = (): React.JSX.Element => {
   const route = useRoute();
   const contact = route.params as Contact;

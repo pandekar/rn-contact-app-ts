@@ -1,14 +1,6 @@
 import * as React from 'react';
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  FlatList,
-  Image,
-  Alert,
-  ToastAndroid,
-} from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome6';
+import {View, Text, Alert} from 'react-native';
+
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 
@@ -19,12 +11,57 @@ import {
   fetchInitiateContact,
   reloadContacts,
 } from '../../redux/action/contact.action';
-import {LoadingMask} from '../../components';
+import {LoadingMask, ContactList, HomeHeader} from '../../components';
 
-import type {Contact, InitialState} from '../../types/index.types';
+import type {
+  Contact,
+  InitialState,
+  VoidFunction,
+  VoidIdFunction,
+} from '../../types/index.types';
+import type {Props as HomeHeaderProps} from '../../components/homeHeader/homeHeader.types';
+import type {Props as ContactListProps} from '../../components/contactList/contactList.types';
 
 const {CONTACT_ADD, CONTACT_DETAIL} = screenConstants;
 
+/**
+ * get contact list props
+ * @param {Array<Contact>} contacts - contacts
+ * @param readContact - read contact function
+ * @param updateContact - update contact function
+ * @param deleteAlert - delete alert function
+ * @returns {ContactListProps} - contact list props value
+ */
+const _getContactListProps = (
+  contacts: Array<Contact>,
+  readContact: (item: Contact) => void,
+  updateContact: VoidIdFunction,
+  deleteAlert: VoidIdFunction,
+): ContactListProps => ({
+  contacts,
+  readContact,
+  updateContact,
+  deleteAlert,
+});
+
+/**
+ * get home header props
+ * @param refreshContacts - refresh contact function
+ * @param createContact - create contact function
+ * @returns {HomeHeaderProps} - home header props value
+ */
+const _getHomeHeaderProps = (
+  refreshContacts: VoidFunction,
+  createContact: VoidFunction,
+): HomeHeaderProps => ({
+  refreshContacts,
+  createContact,
+});
+
+/**
+ * Home screen
+ * @returns {React.JSX.Element}
+ */
 const Home = (): React.JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
@@ -86,84 +123,18 @@ const Home = (): React.JSX.Element => {
 
   return (
     <View style={styles.main}>
-      <View style={styles.header}>
-        <View>
-          <TouchableOpacity>
-            <Icon
-              name="rotate"
-              size={30}
-              color="white"
-              onPress={() => refreshContacts()}
-            />
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.headerText}>Contact List</Text>
-        <View>
-          <TouchableOpacity>
-            <Icon
-              name="plus"
-              size={30}
-              color="white"
-              onPress={() => createContact()}
-            />
-          </TouchableOpacity>
-        </View>
-      </View>
+      <HomeHeader {..._getHomeHeaderProps(refreshContacts, createContact)} />
       {contactsLoading && <LoadingMask />}
       <View style={styles.listBox}>
         {error && <Text>{error}</Text>}
         {contacts && (
-          <FlatList
-            data={contacts}
-            renderItem={({item}) => (
-              <View style={styles.contact}>
-                <TouchableOpacity onPress={() => readContact(item)}>
-                  <View>
-                    {item.photo !== 'N/A' ? (
-                      <Image
-                        style={styles.image}
-                        source={{
-                          uri: item.photo,
-                        }}
-                      />
-                    ) : (
-                      <Image
-                        style={styles.image}
-                        source={require('../../images/unknown.png')}
-                      />
-                    )}
-                  </View>
-                </TouchableOpacity>
-                <View>
-                  <View style={styles.itemContent}>
-                    <Text style={styles.name}>
-                      {item.firstName} {item.lastName}
-                    </Text>
-                    <Text style={{fontSize: 15, color: 'white'}}>age: {item.age}</Text>
-                  </View>
-                  <View style={styles.buttonContainer}>
-                    <View>
-                      <TouchableOpacity
-                        style={styles.button}
-                        onPress={() => updateContact(item.id)}>
-                        <Icon name="pencil" size={25} color="whitesmoke" />
-                      </TouchableOpacity>
-                    </View>
-                    <View>
-                      <TouchableOpacity style={styles.button}>
-                        <Icon
-                          name="trash"
-                          size={25}
-                          color="firebrick"
-                          onPress={() => deleteAlert(item.id)}
-                        />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-              </View>
+          <ContactList
+            {..._getContactListProps(
+              contacts,
+              readContact,
+              updateContact,
+              deleteAlert,
             )}
-            keyExtractor={item => item.id}
           />
         )}
       </View>

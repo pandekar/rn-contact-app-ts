@@ -3,6 +3,10 @@ import {View, Text} from 'react-native';
 
 import styles from './loadingMask.styles';
 
+/**
+ * Loading mask
+ * @returns {React.JSX.Element} - component
+ */
 const LoadingMask = (): React.JSX.Element => {
   return (
     <View style={styles.main}>

@@ -1,3 +1,6 @@
+export type VoidFunction = () => void;
+export type VoidIdFunction = (id: string) => void;
+
 export type NewContact = {
   firstName: string;
   lastName: string;
