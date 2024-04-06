@@ -19,11 +19,12 @@ import styles from './contactAdd.styles';
 import {contactValidation} from '../../utils';
 import {postContact, putContact} from '../../services/contact.service';
 import {reloadContacts} from '../../redux/action/contact.action';
-import {screenConstants} from '../../constants';
+import {screenConstants, formActionConstants} from '../../constants';
 
 import type {InitialState} from '../../types/index.types';
 
 const {HOME} = screenConstants;
+const {CREATE, UPDATE} = formActionConstants;
 
 /**
  * Contact Add screen
@@ -41,12 +42,12 @@ const ContactAdd = (): React.JSX.Element => {
   const [firstname, setFirstname] = useState('');
   const [lastname, setLastname] = useState('');
   const [age, setAge] = useState('');
-  const [status, setStatus] = useState('create');
+  const [status, setStatus] = useState(CREATE);
   const [imageurl, setImageurl] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (route.params && route.params.msg === 'update') {
+    if (route.params && route.params.msg === UPDATE) {
       const contactTarget = contacts.find(
         contact => contact.id === route.params.id,
       );
@@ -108,7 +109,7 @@ const ContactAdd = (): React.JSX.Element => {
 
   const validation = () => {
     let messageError = contactValidation(firstname, lastname, age, imageurl);
-    if (!messageError && status === 'update') {
+    if (!messageError && status === UPDATE) {
       handlePutContact();
     } else if (!messageError) {
       handlePostContact();
@@ -149,7 +150,7 @@ const ContactAdd = (): React.JSX.Element => {
       <View style={styles.main}>
         <View style={styles.header}>
           <Text style={styles.headerText}>
-            Contact {status === 'update' ? 'Update' : 'Add'}
+            Contact {status === UPDATE ? 'Update' : 'Add'}
           </Text>
         </View>
         <View style={styles.mainBox}>
@@ -219,7 +220,7 @@ const ContactAdd = (): React.JSX.Element => {
               onPress={() => validation()}
               style={styles.btn}
               activeOpacity={0.8}>
-              <Text>{status === 'update' ? 'SAVE' : 'ADD'}</Text>
+              <Text>{status === UPDATE ? 'SAVE' : 'ADD'}</Text>
             </TouchableOpacity>
           </View>
         </View>

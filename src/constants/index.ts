@@ -20,4 +20,9 @@ const colorConstants = {
   thirdary: '#FFC436',
 };
 
-export {reduxConstants, screenConstants, colorConstants};
+const formActionConstants = {
+  CREATE: 'create',
+  UPDATE: 'update',
+};
+
+export {reduxConstants, screenConstants, colorConstants, formActionConstants};

@@ -5,7 +5,7 @@ import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
 
 import styles from './home.styles';
-import {screenConstants} from '../../constants';
+import {screenConstants, formActionConstants} from '../../constants';
 import {deleteContact} from '../../services/contact.service';
 import {
   fetchInitiateContact,
@@ -95,7 +95,7 @@ const Home = (): React.JSX.Element => {
 
   const updateContact = (id: string) => {
     const contact = {
-      msg: 'update',
+      msg: formActionConstants.UPDATE,
       id: id,
     };
     navigation.navigate(CONTACT_ADD, contact);
