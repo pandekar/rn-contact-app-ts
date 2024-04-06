@@ -21,6 +21,12 @@ test('contact form validation', () => {
   expect(contactValidation('firstname', 'lastname', '1', 'imageurl')).toEqual(
     '',
   );
+  expect(contactValidation('first name', 'lastname', '1', 'imageurl')).toEqual(
+    'first name must not contain space',
+  );
+  expect(contactValidation('firstname', 'last name', '1', 'imageurl')).toEqual(
+    'last name must not contain space',
+  );
   expect(contactValidation('', 'lastname', '1', 'imageurl')).toEqual(
     'please insert first name...',
   );

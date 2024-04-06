@@ -9,6 +9,7 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
+
 import {useDispatch, useSelector} from 'react-redux';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -24,7 +25,11 @@ import type {InitialState} from '../../types/index.types';
 
 const {HOME} = screenConstants;
 
-const ContactAdd = () => {
+/**
+ * Contact Add screen
+ * @returns {React.JSX.Element}
+ */
+const ContactAdd = (): React.JSX.Element => {
   const dispatch = useDispatch();
   const route = useRoute();
   const navigation = useNavigation();
@@ -65,14 +70,18 @@ const ContactAdd = () => {
       photo: imageurl,
     };
 
-    postContact(newContact).then(response => {
-      if (response.message === 'contact saved') {
-        navigation.navigate(HOME);
+    postContact(newContact)
+      .then(response => {
+        if (response === 201) {
+          dispatch(reloadContacts());
 
-        dispatch(reloadContacts());
-        ToastAndroid.show(response.message, ToastAndroid.LONG);
-      }
-    });
+          ToastAndroid.show('Contact added', ToastAndroid.LONG);
+          navigation.navigate(HOME);
+        }
+      })
+      .catch(_ => {
+        ToastAndroid.show('an error occured', ToastAndroid.LONG);
+      });
   };
 
   const handlePutContact = () => {
@@ -83,14 +92,18 @@ const ContactAdd = () => {
       photo: imageurl,
     };
 
-    putContact(newContact, id).then(response => {
-      if (response.message === 'Contact edited') {
-        navigation.navigate(HOME);
+    putContact(newContact, id)
+      .then(response => {
+        if (response === 201) {
+          dispatch(reloadContacts());
 
-        dispatch(reloadContacts());
-        ToastAndroid.show(response.message, ToastAndroid.LONG);
-      }
-    });
+          ToastAndroid.show('Contact updated', ToastAndroid.LONG);
+          navigation.navigate(HOME);
+        }
+      })
+      .catch(_ => {
+        ToastAndroid.show('an error occured', ToastAndroid.LONG);
+      });
   };
 
   const validation = () => {
@@ -104,15 +117,15 @@ const ContactAdd = () => {
     }
   };
 
-  const handleFirstname = (text: string) => {
+  const handleFirstname = (text: string): void => {
     setFirstname(text);
   };
 
-  const handleLastname = (text: string) => {
+  const handleLastname = (text: string): void => {
     setLastname(text);
   };
 
-  const handleAge = (ageValue: string) => {
+  const handleAge = (ageValue: string): void => {
     setAge(ageValue);
   };
 

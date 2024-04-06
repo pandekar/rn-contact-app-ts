@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {View, Text, Alert} from 'react-native';
+import {View, Text, Alert, ToastAndroid} from 'react-native';
 
 import {useNavigation, useFocusEffect} from '@react-navigation/native';
 import {useDispatch, useSelector} from 'react-redux';
@@ -66,6 +66,10 @@ const Home = (): React.JSX.Element => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
+  const [filteredContacts, setFilteredContacts] = React.useState<
+    Array<Contact>
+  >([]);
+
   // saga
   const contacts = useSelector(
     (state: {contactReducer: InitialState}) => state.contactReducer.datas,
@@ -106,8 +110,25 @@ const Home = (): React.JSX.Element => {
       {
         text: 'OK',
         onPress: () => {
-          deleteContact(id);
-          dispatch(reloadContacts());
+          deleteContact(id)
+            .then(_ => {
+              refreshContacts();
+              ToastAndroid.show(
+                'Contact deleted on the server',
+                ToastAndroid.LONG,
+              );
+            })
+            .catch(_ => {
+              // filter contacts after delete
+              const newFilteredContacts = contacts.filter(
+                contact => contact.id !== id,
+              );
+              setFilteredContacts(newFilteredContacts);
+              ToastAndroid.show(
+                'an error occured on the server, but we delete the data locally',
+                ToastAndroid.LONG,
+              );
+            });
         },
       },
     ]);
@@ -117,6 +138,8 @@ const Home = (): React.JSX.Element => {
       if (!contacts.length) {
         dispatch(fetchInitiateContact());
       }
+
+      setFilteredContacts(contacts);
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [contacts]),
   );
@@ -130,7 +153,7 @@ const Home = (): React.JSX.Element => {
         {contacts && (
           <ContactList
             {..._getContactListProps(
-              contacts,
+              filteredContacts,
               readContact,
               updateContact,
               deleteAlert,

@@ -10,12 +10,16 @@ const contactValidation = (
     return 'first name must be at least 3 characters long';
   } else if (firstname.length >= 30) {
     return 'first name must be less than or equal to 30 characters long';
+  } else if (firstname.indexOf(' ') >= 0) {
+    return 'first name must not contain space';
   } else if (lastname.length === 0) {
     return 'please insert last name...';
   } else if (lastname.length < 3) {
     return 'last name must be at least 3 characters long';
   } else if (lastname.length >= 30) {
     return 'last name must be less than or equal to 30 characters long';
+  } else if (lastname.indexOf(' ') >= 0) {
+    return 'last name must not contain space';
   } else if (age.length === 0) {
     return 'please insert age...';
   } else if (parseInt(age) === 0) {

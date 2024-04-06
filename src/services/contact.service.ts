@@ -26,9 +26,9 @@ const getContact = async (id: string) => {
 
 const postContact = async (contact: NewContact) => {
   try {
-    const {data} = await axios.post(BASE_URL, contact);
+    const response = await axios.post(BASE_URL, contact);
 
-    return data;
+    return response.status;
   } catch (error: any) {
     throw error.data;
   }
@@ -36,9 +36,9 @@ const postContact = async (contact: NewContact) => {
 
 const putContact = async (contact: NewContact, id: string) => {
   try {
-    const {data} = await axios.put(BASE_URL + '/' + id, contact);
+    const response = await axios.put(BASE_URL + '/' + id, contact);
 
-    return data;
+    return response.status;
   } catch (error: any) {
     throw error.data;
   }
